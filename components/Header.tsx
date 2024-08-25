@@ -2,8 +2,22 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
+import { useAuth } from "@/app/context/auth-supabase";
 
 const Header = () => {
+  const { user, signOut } = useAuth();
+
+  function handleLogout() {
+     signOut(
+    ).then(() => {
+     
+    }).catch((error) => {
+      console.error(error);
+    } );
+    
+  }
+
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -15,20 +29,18 @@ const Header = () => {
             style={styles.userImg}
           />
           <View style={styles.userTxtWrapper}>
-            <Text style={[styles.userText, { fontSize: 12 }]}>Hi, Jenny</Text>
+            <Text style={[styles.userText, { fontSize: 12 }]}>{user?.email}</Text>
             <Text style={[styles.userText, { fontSize: 16 }]}>
               Your <Text style={styles.boldText}>Budget</Text>
             </Text>
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => {}}
-          style={styles.btnWrapper}
-        >
-          <Text style={styles.btnText}>
-            My Transactions
-          </Text>
-        </TouchableOpacity>
+            onPress={handleLogout}
+            style={styles.btnWrapper}
+          >
+            <Text style={styles.btnText}>Logout</Text>
+          </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
