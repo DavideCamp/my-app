@@ -23,12 +23,5 @@ Libraries used in this project
     npx expo start
    ```
 
-## App Screenshot
-![Finance App in React Native with Expo Router](./finance-app-iphone.png)
 
-## Watch it on YouTube
-
-This repository is part of a tutorial on my [YouTube channel](https://www.youtube.com/@itzpradip). Check out the complete tutorial on YouTube by clicking below. 👇
-
-[![Finance App UI in React Native with Expo Router Tutorial for Beginners](https://img.youtube.com/vi/MLVxvof54KA/0.jpg)](https://youtu.be/MLVxvof54KA)
 
