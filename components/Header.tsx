@@ -3,9 +3,11 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
 import { useAuth } from "@/app/context/auth-supabase";
+import { getUser } from "@/app/api/user";
 
 const Header = () => {
   const { user, signOut } = useAuth();
+  getUser();
 
   function handleLogout() {
      signOut(
@@ -24,12 +26,8 @@ const Header = () => {
         style={styles.wrapper}
       >
         <View style={styles.userInfoWrapper}>
-          <Image
-            source={{ uri: "https://i.pravatar.cc/250?u=12" }}
-            style={styles.userImg}
-          />
           <View style={styles.userTxtWrapper}>
-            <Text style={[styles.userText, { fontSize: 12 }]}>{user?.email}</Text>
+            <Text style={[styles.userText, { fontSize: 12 }]}>{user?.user_metadata['name']}</Text>
             <Text style={[styles.userText, { fontSize: 16 }]}>
               Your <Text style={styles.boldText}>Budget</Text>
             </Text>
@@ -70,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 30, 
   },
   userTxtWrapper: {
-    marginLeft:10,
+    
   },
   userText: {
     color: Colors.white,

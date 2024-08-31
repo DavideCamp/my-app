@@ -60,17 +60,15 @@ import {
   
           <TouchableOpacity
             onPress={async () => {
-              const { data, error } = await signUp(
+              await signUp(
                 emailRef.current,
                 passwordRef.current,
                 userNameRef.current
-              );
-              if (data) {
-                router.replace("/");
-              } else {
-                console.log(error);
-                // Alert.alert("Login Error", resp.error?.message);
-              }
+              ).then(() => {
+                  router.replace("/home")
+              }).finally(() => {
+                console.log("done");
+              })
             }}
             style={styles.button}
           >

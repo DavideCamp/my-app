@@ -170,6 +170,7 @@ export function Provider(props: ProviderProps) {
       const updateResp = await supabase.auth.updateUser({
         data: { name: username },
       });
+      console.log(updateResp);
       if (updateResp.error) throw updateResp.error;
       updateResp.data.user;
 
