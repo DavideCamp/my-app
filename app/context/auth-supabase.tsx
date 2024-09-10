@@ -59,11 +59,9 @@ export function Provider(props: ProviderProps) {
     }, [rootNavigation]);
 
     React.useEffect(() => {
-        console.log("useProtectedRoute", user, segments[0], authInitialized, isNavigationReady);
       if (!isNavigationReady) {
         return;
       }
-
       const inAuthGroup = segments[0] === "(auth)";
 
       if (!authInitialized) return;
