@@ -29,7 +29,7 @@ const Header = () => {
           <View style={styles.userTxtWrapper}>
             <Text style={[styles.userText, { fontSize: 12 }]}>{user?.user_metadata['name']}</Text>
             <Text style={[styles.userText, { fontSize: 16 }]}>
-              Your <Text style={styles.boldText}>Budget</Text>
+              Total Balance <Text style={styles.boldText}>12345.00$</Text> 
             </Text>
           </View>
         </View>

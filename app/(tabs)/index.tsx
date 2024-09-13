@@ -3,7 +3,6 @@ import React from "react";
 import Colors from "@/constants/Colors";
 import { Stack } from "expo-router";
 import Header from "@/components/Header";
-import { PieChart } from "react-native-gifted-charts";
 import ExpenseBlock from "@/components/ExpenseBlock";
 import IncomeBlock from "@/components/IncomeBlock";
 import SpendingBlock from "@/components/SpendingBlock";
@@ -12,9 +11,11 @@ import incomeList from '@/data/income.json';
 import spendingList from '@/data/spending.json';
 import SwitchSelector from "react-native-switch-selector";
 import CostumDropDown from "../components/DropDown";
+import ExpandableCalendarScreen from "../components/Calendar";
+import SummaryExpense from "../components/SummaryExpense";
 
 const Page = () => {
-  const [country, setCountry] = React.useState('1');
+  const [typeOfFlow, setTypeOfFlow] = React.useState('e');
   const mockDataExpenses = {
     totalExpenses: 1475,
   };
@@ -52,7 +53,7 @@ const Page = () => {
             <View style={{ flex: 1 }}>
               <SwitchSelector
                 initial={0}
-                onPress={(value: any) => console.log(value)}
+                onPress={(value: string) => setTypeOfFlow(value)}
                 textColor={Colors.grey}
                 selectedColor={Colors.white}
                 buttonColor={Colors.grey}
@@ -64,21 +65,10 @@ const Page = () => {
                 ]}
               />
             </View>
-            <View style={{ flex: 1}} >
-              <CostumDropDown />
-            </View>
-
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <View style={{ gap: 10 }}>
-              <Text style={{ color: Colors.white, fontSize: 16 }}>
-                My <Text style={{ fontWeight: "bold" }}>Expenses</Text>
-              </Text>
-              <Text style={{ color: Colors.white, fontSize: 36, fontWeight: "bold" }}>
-                {mockDataExpenses.totalExpenses}.<Text style={{ fontSize: 22, fontWeight: 400 }}>00</Text>
-              </Text>
-            </View>
-            <View style={{ paddingVertical: 20, alignItems: 'center' }}>
+
+            {/* <View style={{ paddingVertical: 20, alignItems: 'center' }}>
               { <PieChart
                 data={pieData}
                 donut
@@ -96,13 +86,10 @@ const Page = () => {
                   );
                 }}
               /> }
-            </View>
+            </View> */}
           </View>
-
-          <ExpenseBlock expenseList={ExpenseList} />
-
-          <IncomeBlock incomeList={incomeList} />
-
+          <ExpandableCalendarScreen />
+          {typeOfFlow === 'e' ? <SummaryExpense /> : <IncomeBlock incomeList={incomeList} />}
           <SpendingBlock spendingList={spendingList} />
         </ScrollView>
       </View>
