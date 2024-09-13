@@ -22,7 +22,6 @@ Libraries used in this project
    ```bash
     npx expo start
    ```
+<img src="https://github.com/DavideCamp/finance-app/blob/develop/assets/images/screen.png" width="400"/>
 
 
-
-![Home]('assets/images/screen-home.png)
