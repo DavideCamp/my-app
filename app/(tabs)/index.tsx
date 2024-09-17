@@ -1,21 +1,19 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
 import Colors from "@/constants/Colors";
 import { Stack } from "expo-router";
 import Header from "@/components/Header";
-import ExpenseBlock from "@/components/ExpenseBlock";
 import IncomeBlock from "@/components/IncomeBlock";
 import SpendingBlock from "@/components/SpendingBlock";
-import ExpenseList from '@/data/expenses.json';
 import incomeList from '@/data/income.json';
 import spendingList from '@/data/spending.json';
 import SwitchSelector from "react-native-switch-selector";
-import CostumDropDown from "../components/DropDown";
 import ExpandableCalendarScreen from "../components/Calendar";
 import SummaryExpense from "../components/SummaryExpense";
 
 const Page = () => {
-  const [typeOfFlow, setTypeOfFlow] = React.useState('e');
+  const [typeOfFlow, setTypeOfFlow] = useState('e');
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const mockDataExpenses = {
     totalExpenses: 1475,
   };
@@ -40,6 +38,10 @@ const Page = () => {
     { value: 3, color: "#FFA5BA", gradientCenterColor: "#FF7F97", text: "3%" },
   ];
 
+  function onChangeDate(date: string) {
+    setSelectedDate(date);
+  }
+
   return (
     <>
       <Stack.Screen
@@ -47,17 +49,18 @@ const Page = () => {
           header: () => <Header />,
         }}
       />
-      <View style={[styles.container, { paddingTop: 40 }]}>
+      <View style={[styles.container, { paddingTop: 50 }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <View style={{ flex: 1 }}>
               <SwitchSelector
+                backgroundColor={Colors.lightGrey}
                 initial={0}
                 onPress={(value: string) => setTypeOfFlow(value)}
                 textColor={Colors.grey}
                 selectedColor={Colors.white}
-                buttonColor={Colors.grey}
-                borderColor={Colors.grey}
+                buttonColor={typeOfFlow === 'e' ? Colors.red : Colors.green}
+                borderColor={Colors.lightGrey}
                 hasPadding
                 options={[
                   { label: "Expense", value: "e" },
@@ -88,9 +91,9 @@ const Page = () => {
               /> }
             </View> */}
           </View>
-          <ExpandableCalendarScreen />
+          <ExpandableCalendarScreen onChangeDate={onChangeDate}/>
           {typeOfFlow === 'e' ? <SummaryExpense /> : <IncomeBlock incomeList={incomeList} />}
-          <SpendingBlock spendingList={spendingList} />
+          <SpendingBlock spendingList={spendingList} selectedDate={selectedDate}/>
         </ScrollView>
       </View>
     </>
@@ -102,7 +105,6 @@ export default Page;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.black,
     paddingHorizontal: 20,
   },
 });

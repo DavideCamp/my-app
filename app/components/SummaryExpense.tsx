@@ -9,7 +9,7 @@ import Colors from "@/constants/Colors";
 const SummaryExpense = () => {
   const summary = [{
     name: 'Day',
-    amount: 123,
+    amount: 13,
   },
   {
     name: 'Week',
@@ -17,7 +17,7 @@ const SummaryExpense = () => {
   },
   {
     name: 'Month',
-    amount: 123,
+    amount: 1230,
   },]
 
 
@@ -30,19 +30,22 @@ const SummaryExpense = () => {
     }}>
     {summary.map((item, index) => <>
           <View
+              key={index}
               style={{
-                backgroundColor: Colors.grey,
+                backgroundColor: Colors.lightGrey,
                 padding: 20,
-                borderRadius: 20,
-                width: '30%',
+                borderRadius: 30,
+                width: '32%',
                 gap: 10,
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
           >
             <Text
               style={[
                 styles.expenseBlockTxt1,
                 {
-                  color: Colors.white,
+                  color: Colors.black,
                 },
               ]}
             >
@@ -52,7 +55,9 @@ const SummaryExpense = () => {
               style={[
                 styles.expenseBlockTxt2,
                 {
-                  color: Colors.white,
+                  color: Colors.black,
+                  fontSize: 20,
+
                 },
               ]}
             >
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     gap: 8,
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   expenseBlockTxt1: {
     color: Colors.white,

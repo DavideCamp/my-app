@@ -49,7 +49,6 @@ export default Header;
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: Colors.black, 
   },
   wrapper: {
     flexDirection: "row",
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     
   },
   userText: {
-    color: Colors.white,
+    color: Colors.black,
   },
   boldText: {
     fontWeight:'700',
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   btnText: { 
-    color: Colors.white, 
+    color: Colors.black, 
     fontSize: 12,
   },
 });
