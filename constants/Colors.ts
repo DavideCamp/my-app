@@ -5,5 +5,7 @@ export default {
   white: '#FCFCFC',
   tintColor: '#723FEB',
   blue: '#97E0F7',
-  green: '#00B800' // Light green color
+  green: '#00B800', // Light green color
+  lightGrey: '#F2F2F2',
+  red : '#ff2424',
 };

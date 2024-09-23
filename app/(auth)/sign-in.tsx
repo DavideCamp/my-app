@@ -7,11 +7,14 @@ import {
   } from "react-native";
   import { useAuth } from "../context/auth-supabase";
   import { Stack, useRouter } from "expo-router";
-  import { useRef } from "react";
+  import { useRef, useState } from "react";
+  import Colors from "@/constants/Colors";
+
   
   export default function SignIn() {
     const { signIn } = useAuth();
     const router = useRouter();
+    const [error, setError] = useState("");
   
     const emailRef = useRef("");
     const passwordRef = useRef("");
@@ -27,6 +30,7 @@ import {
               nativeID="email"
               onChangeText={(text) => {
                 emailRef.current = text;
+                setError("");
               }}
               style={styles.textInput}
             />
@@ -39,9 +43,13 @@ import {
               nativeID="password"
               onChangeText={(text) => {
                 passwordRef.current = text;
+                setError("");
               }}
               style={styles.textInput}
             />
+          </View>
+          <View>
+            <Text style={{ color: "red" }}>{error}</Text>
           </View>
   
           <TouchableOpacity
@@ -53,7 +61,7 @@ import {
                 console.log(data);
                 router.replace("/");
               }).catch((error) => {
-                console.error(error);
+                setError(error.message);
               } );
               
             }}
@@ -77,22 +85,22 @@ import {
   const styles = StyleSheet.create({
     label: {
       marginBottom: 4,
-      color: "#455fff",
+      color: Colors.black,
     },
     textInput: {
       width: 250,
       borderWidth: 1,
-      borderRadius: 4,
-      borderColor: "#455fff",
-      paddingHorizontal: 8,
-      paddingVertical: 4,
+      borderRadius: 10,
+      borderColor: Colors.grey,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
       marginBottom: 16,
     },
     button: {
-      backgroundColor: "blue",
-      padding: 10,
+      backgroundColor: Colors.grey,
+      padding: 15,
       width: 250,
-      borderRadius: 5,
+      borderRadius: 10,
       marginTop: 16,
     },
     buttonText: {

@@ -12,13 +12,20 @@ import {
   SpotifyIcon,
 } from "@/constants/Icons";
 
-const SpendingBlock = ({ spendingList }: { spendingList: SpendingType[] }) => {
+
+interface Props {
+  spendingList: SpendingType[];
+  selectedDate: string;
+}
+
+const SpendingBlock = (props:Props) => {
+  const { spendingList, selectedDate } = props;
   let icon = <DollarIcon width={22} height={22} color={Colors.white} />;
 
   return (
     <View style={styles.spendingSectionWrapper}>
       <Text style={styles.sectionTitle}>
-        July <Text style={{ fontWeight: "700" }}>Spending</Text>
+        {selectedDate}
       </Text>
 
       {spendingList.map((item) => {
@@ -44,7 +51,7 @@ const SpendingBlock = ({ spendingList }: { spendingList: SpendingType[] }) => {
             <View style={styles.textWrapper}>
               <View style={{ gap: 5 }}>
                 <Text style={styles.itemName}>{item.name}</Text>
-                <Text style={{ color: Colors.white }}>{item.date}</Text>
+                <Text style={{ color: Colors.grey }}>{item.date}</Text>
               </View>
               <Text style={styles.itemName}>${item.amount}</Text>
             </View>
@@ -63,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   sectionTitle: {
-    color: Colors.white,
+    color: Colors.black,
     fontSize: 16,
     marginBottom: 20,
   },
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   itemName: {
-    color: Colors.white,
+    color: Colors.black,
     fontSize: 16,
     fontWeight: "600",
   },
