@@ -3,20 +3,15 @@ import { Platform, StyleSheet, View, Text } from 'react-native';
 
 //import EditScreenInfo from '@/components/EditScreenInfo';
 //import { Text, View } from '@/components/Themed';
-import { Stack } from 'expo-router';
 
-export default function ModalScreen() {
+export default function Modal() {
   return (
-    <>
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} />
-      {/* <EditScreenInfo path="app/modal.tsx" /> */}
+      <Text style={styles.title}>Modal Screen</Text>
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </View>
-    </>
   );
 }
 

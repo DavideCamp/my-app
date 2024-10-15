@@ -9,7 +9,6 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { Provider, useAuth } from "./context/auth-supabase";
-import Colors from "@/constants/Colors";
 
 export {
   // Catch any errors thrown by the Layout component.

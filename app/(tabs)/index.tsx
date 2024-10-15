@@ -10,101 +10,70 @@ import spendingList from '@/data/spending.json';
 import SwitchSelector from "react-native-switch-selector";
 import ExpandableCalendarScreen from "../components/Calendar";
 import SummaryExpense from "../components/SummaryExpense";
+import AddExpenseButton from "../components/ButtonAddExpense";
 
 const Page = () => {
-  const [typeOfFlow, setTypeOfFlow] = useState('e');
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-  const mockDataExpenses = {
-    totalExpenses: 1475,
+  const [flowType, setFlowType] = useState('expense');
+  const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const expensesData = {
+    total: 1475,
   };
 
-  const pieData = [
-    {
-      value: 47,
-      color: Colors.tintColor,
-      focused: true,
-      text: "47%",
-    },
-    {
-      value: 40,
-      color: Colors.blue,
-      text: "40%",
-    },
-    {
-      value: 16,
-      color: Colors.white,
-      text: "16%",
-    },
-    { value: 3, color: "#FFA5BA", gradientCenterColor: "#FF7F97", text: "3%" },
+  const chartData = [
+    { value: 47, color: Colors.tintColor, focused: true, label: "47%" },
+    { value: 40, color: Colors.blue, label: "40%" },
+    { value: 16, color: Colors.white, label: "16%" },
+    { value: 3, color: "#FFA5BA", gradientCenterColor: "#FF7F97", label: "3%" },
   ];
 
-  function onChangeDate(date: string) {
-    setSelectedDate(date);
-  }
+  const handleDateChange = (date: string) => {
+    setCurrentDate(date);
+  };
 
   return (
     <>
-      <Stack.Screen
-        options={{
-          header: () => <Header />,
-        }}
-      />
+      <Stack.Screen options={{ header: () => <Header /> }} />
       <View style={[styles.container, { paddingTop: 50 }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <View style={{ flex: 1 }}>
-              <SwitchSelector
-                backgroundColor={Colors.lightGrey}
-                initial={0}
-                onPress={(value: string) => setTypeOfFlow(value)}
-                textColor={Colors.grey}
-                selectedColor={Colors.white}
-                buttonColor={typeOfFlow === 'e' ? Colors.red : Colors.green}
-                borderColor={Colors.lightGrey}
-                hasPadding
-                options={[
-                  { label: "Expense", value: "e" },
-                  { label: "Income", value: "i" }
-                ]}
-              />
-            </View>
+          <View style={styles.switchSelectorWrapper}>
+            <SwitchSelector
+              backgroundColor={Colors.lightGrey}
+              initial={0}
+              onPress={(value: string) => setFlowType(value)}
+              textColor={Colors.grey}
+              selectedColor={Colors.white}
+              buttonColor={flowType === 'expense' ? Colors.red : Colors.green}
+              borderColor={Colors.lightGrey}
+              hasPadding
+              options={[
+                { label: "Expense", value: "expense" },
+                { label: "Income", value: "income" }
+              ]}
+            />
           </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-
-            {/* <View style={{ paddingVertical: 20, alignItems: 'center' }}>
-              { <PieChart
-                data={pieData}
-                donut
-                showGradient
-                sectionAutoFocus
-                semiCircle
-                radius={70}
-                innerRadius={55}
-                innerCircleColor={Colors.black}
-                centerLabelComponent={() => {
-                  return (
-                    <View style={{ justifyContent: "center", alignItems: "center" }}>
-                      <Text style={{ fontSize: 22, color: "white", fontWeight: "bold" }}>47%</Text>
-                    </View>
-                  );
-                }}
-              /> }
-            </View> */}
-          </View>
-          <ExpandableCalendarScreen onChangeDate={onChangeDate}/>
-          {typeOfFlow === 'e' ? <SummaryExpense /> : <IncomeBlock incomeList={incomeList} />}
-          <SpendingBlock spendingList={spendingList} selectedDate={selectedDate}/>
+          <ExpandableCalendarScreen onChangeDate={handleDateChange} />
+          {flowType === 'expense' ? <SummaryExpense /> : <IncomeBlock incomeList={incomeList} />}
+          <SpendingBlock spendingList={spendingList} selectedDate={currentDate} />
         </ScrollView>
-      </View>
+      </View> 
+      <AddExpenseButton onPress={() => setIsModalVisible(!isModalVisible)} />
     </>
   );
 };
-
-export default Page;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
   },
+  switchSelectorWrapper: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flex: 1,
+  },
 });
+
+export default Page;

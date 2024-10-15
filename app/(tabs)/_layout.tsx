@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { AntDesign, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
-import { View } from "react-native";
+import { Button, TouchableOpacity, View } from "react-native";
 import Colors from "@/constants/Colors";
 import { StatusBar } from "expo-status-bar";
 
@@ -13,7 +13,6 @@ const Layout = () => {
           tabBarStyle: {
             backgroundColor: Colors.grey,
             position: "absolute",
-            bottom: 40,
             justifyContent: "center",
             alignSelf: "center",
             height: 63,
@@ -21,11 +20,12 @@ const Layout = () => {
             paddingHorizontal: 10,
             paddingVertical: 8,
             paddingBottom: 8,
-            borderRadius: 40,
             borderWidth: 1,
             borderTopWidth: 1,
             borderColor: "#333",
             borderTopColor: "#333",
+            width: "100%",
+            marginLeft: "0%",
           },
           tabBarShowLabel: false,
           tabBarInactiveTintColor: "#999",
