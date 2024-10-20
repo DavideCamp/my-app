@@ -3,7 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
 import { useAuth } from "@/app/context/auth-supabase";
-import { getUser } from "@/app/api/user";
+import { getUser } from "@/app/service/user";
 
 const Header = () => {
   const { user, signOut } = useAuth();

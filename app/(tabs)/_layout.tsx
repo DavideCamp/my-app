@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "expo-router";
+import { Stack, Tabs } from "expo-router";
 import { AntDesign, FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 import { Button, TouchableOpacity, View } from "react-native";
 import Colors from "@/constants/Colors";

@@ -9,6 +9,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { Provider, useAuth } from "./context/auth-supabase";
+import Colors from "@/constants/Colors";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,15 +53,14 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme(); //TODO CREARE TOGGLE FOR THEME
   const { authInitialized, user } = useAuth();
 
   if (!authInitialized && !user) return null;
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
     </ThemeProvider>
   );
@@ -70,7 +70,7 @@ export const DefaultTheme: Theme = {
   dark: false,
   colors: {
     primary: "#6200EE",
-    background: "#FFFFFF",
+    background: Colors.white,
     card: "#F5F5F5",
     text: "#000000",
     border: "#E0E0E0",

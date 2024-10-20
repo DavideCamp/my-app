@@ -8,14 +8,15 @@ import SpendingBlock from "@/components/SpendingBlock";
 import incomeList from '@/data/income.json';
 import spendingList from '@/data/spending.json';
 import SwitchSelector from "react-native-switch-selector";
-import ExpandableCalendarScreen from "../components/Calendar";
-import SummaryExpense from "../components/SummaryExpense";
-import AddExpenseButton from "../components/ButtonAddExpense";
+import ExpandableCalendarScreen from "../components/commons/calendar/Calendar";
+import SummaryExpense from "../components/Expense/SummaryExpense";
+import AddExpenseButton from "../components/Expense/ButtonAddExpense";
+import ModalForm from "../components/commons/Modal";
 
 const Page = () => {
-  const [flowType, setFlowType] = useState('expense');
+  const [flowType, setFlowType] = useState<string>('expense');
   const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const expensesData = {
     total: 1475,
@@ -57,8 +58,11 @@ const Page = () => {
           {flowType === 'expense' ? <SummaryExpense /> : <IncomeBlock incomeList={incomeList} />}
           <SpendingBlock spendingList={spendingList} selectedDate={currentDate} />
         </ScrollView>
-      </View> 
-      <AddExpenseButton onPress={() => setIsModalVisible(!isModalVisible)} />
+        <AddExpenseButton onPress={() => setIsModalVisible(true)} />
+        <ModalForm title={flowType} isVisible={isModalVisible} onClose={() => setIsModalVisible(!isModalVisible)} >
+         <></>
+          </ModalForm>
+      </View>
     </>
   );
 };

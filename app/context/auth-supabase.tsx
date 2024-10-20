@@ -68,11 +68,12 @@ export function Provider(props: ProviderProps) {
 
       if (
         // If the user is not signed in and the initial segment is not anything in the auth group.
-        !user &&
-        !inAuthGroup
+        //!user &&
+        //!inAuthGroup
+        false
       ) {
         // Redirect to the sign-in page.
-        //router.push("/sign-in");
+        router.push("/sign-in");
       } else if (user && inAuthGroup) {
         // Redirect away from the sign-in page.
         router.push("/");
